@@ -26,7 +26,9 @@ requirements:
     - {{ compiler('cxx') }}
     - python
     - ninja
-  host:
+    - patch
+    - git
+   host:
   run:
 
 test:
