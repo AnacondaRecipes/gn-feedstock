@@ -28,7 +28,7 @@ requirements:
     - ninja
     - patch
     - git
-   host:
+  host:
   run:
 
 test:
