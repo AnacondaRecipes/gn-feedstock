@@ -3,7 +3,7 @@
 # notation.
 
 {% set name = "gn" %}
-{% set version = "0.0.20200909083119" %}
+{% set version = "0.0.20250416202228" %}
 
 package:
   name: {{ name|lower }}
@@ -12,28 +12,25 @@ package:
 source:
   # We have to use git as the source as the provided tarballs are not stable.
   git_url: https://gn.googlesource.com/gn
-  git_rev: e002e68a48d1c82648eadde2f6aafa20d08c36f2
-  patches:
-    - add-lrt.patch
+  git_rev: 10a27145cd0770b78745ff536e343bf12c70f6c3
+  # patches:
+  #   - add-lrt.patch
 
 build:
-  number: 2
-  skip: true  # [win]
+  number: 0
 
 requirements:
   build:
+    - {{ stdlib('c') }}
     - {{ compiler('c') }}
     - {{ compiler('cxx') }}
     - python
     - ninja
-    - patch
-    - git
-  host:
-  run:
 
 test:
   commands:
-    - test -f $PREFIX/bin/gn
+    - test -f $PREFIX/bin/gn                     # [unix]
+    - if not exist %PREFIX%\\bin\\gn.exe exit 1  # [win]
 
 about:
   home: https://gn.googlesource.com/gn/
@@ -41,6 +38,10 @@ about:
   license_family: BSD
   license_file: LICENSE
   summary: 'GN is a meta-build system that generates build files for Ninja.'
+  description: |
+    GN is currently used as the build system for Chromium, Fuchsia, and related projects.
+  doc_url: https://gn.googlesource.com/gn/+/refs/heads/main/README.md
+  dev_url: https://gn.googlesource.com/gn/+/refs/heads/main
 
 extra:
   recipe-maintainers:
