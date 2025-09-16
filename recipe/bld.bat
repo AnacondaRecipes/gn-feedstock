@@ -1,6 +1,6 @@
 @echo on
 
-python build/gen.py
+python build/gen.py --no-static-libstdc++ --allow-warnings
 if errorlevel 1 exit 1
 
 ninja -C out
