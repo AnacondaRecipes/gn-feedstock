@@ -3,7 +3,7 @@
 # notation.
 
 {% set name = "gn" %}
-{% set version = "0.0.20200909083119" %}
+{% set version = "0.0.20260526193358" %}
 
 package:
   name: {{ name|lower }}
@@ -12,12 +12,10 @@ package:
 source:
   # We have to use git as the source as the provided tarballs are not stable.
   git_url: https://gn.googlesource.com/gn
-  git_rev: e002e68a48d1c82648eadde2f6aafa20d08c36f2
-  patches:
-    - add-lrt.patch
+  git_rev: 3357c4f51b1a9e676378c695dd9c7e9911c35ee6  # 2026-05-26; matches pdfium chromium/7891 DEPS
 
 build:
-  number: 2
+  number: 0
   skip: true  # [win]
 
 requirements:
@@ -26,7 +24,6 @@ requirements:
     - {{ compiler('cxx') }}
     - python
     - ninja
-    - patch
     - git
   host:
   run:
