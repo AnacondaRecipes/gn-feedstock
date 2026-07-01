@@ -24,9 +24,8 @@ requirements:
     - {{ compiler('c') }}
     - {{ compiler('cxx') }}
     - python
-    - ninja
+    - ninja-base
     - git
-  run:
 
 test:
   commands:
@@ -38,6 +37,12 @@ about:
   license_family: BSD
   license_file: LICENSE
   summary: 'GN is a meta-build system that generates build files for Ninja.'
+  description: |
+    GN is a meta-build system that generates build files for Ninja. It is used
+    by Chromium and related projects (including PDFium) to configure native
+    builds.
+  doc_url: https://gn.googlesource.com/gn/+/main/docs/
+  dev_url: https://gn.googlesource.com/gn
 
 extra:
   recipe-maintainers:

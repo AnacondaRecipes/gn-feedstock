@@ -2,10 +2,10 @@
 
 set -euo pipefail
 
-# gn's build/gen.py hardcodes -mmacosx-version-min=14, newer than the SDK on
-# PBP macOS builders. Lower it to the conda osx-arm64 floor so the bootstrap links.
+# gn's build/gen.py hardcodes -mmacosx-version-min=14, newer than the PBP macOS
+# SDK. Lower it to the aggregate CBC osx-arm64 baseline (macos_min_version 12.1).
 if [[ "$(uname)" == "Darwin" ]]; then
-    sed -i.bak "s/-mmacosx-version-min=14/-mmacosx-version-min=11.0/" build/gen.py
+    sed -i.bak "s/-mmacosx-version-min=14/-mmacosx-version-min=12.1/" build/gen.py
 fi
 
 # Drop -Werror from the bootstrap: conda's GCC on Linux flags a benign multi-line
