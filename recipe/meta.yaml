@@ -25,7 +25,6 @@ requirements:
     - python
     - ninja
     - git
-  host:
   run:
 
 test:
