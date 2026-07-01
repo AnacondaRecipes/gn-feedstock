@@ -16,7 +16,6 @@ source:
 
 build:
   number: 0
-  skip: true  # [win]
 
 requirements:
   build:
@@ -29,7 +28,8 @@ requirements:
 
 test:
   commands:
-    - test -f $PREFIX/bin/gn
+    - test -f $PREFIX/bin/gn                    # [unix]
+    - if not exist %PREFIX%\\bin\\gn.exe exit 1  # [win]
 
 about:
   home: https://gn.googlesource.com/gn
