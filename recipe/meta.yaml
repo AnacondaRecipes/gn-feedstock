@@ -3,44 +3,46 @@
 # notation.
 
 {% set name = "gn" %}
-{% set version = "0.0.20200909083119" %}
+{% set version = "0.0.20260526193358" %}
 
 package:
-  name: {{ name|lower }}
+  name: {{ name }}
   version: {{ version }}
 
 source:
   # We have to use git as the source as the provided tarballs are not stable.
   git_url: https://gn.googlesource.com/gn
-  git_rev: e002e68a48d1c82648eadde2f6aafa20d08c36f2
-  patches:
-    - add-lrt.patch
+  git_rev: 3357c4f51b1a9e676378c695dd9c7e9911c35ee6  # 2026-05-26; matches pdfium chromium/7891 DEPS
 
 build:
-  number: 2
-  skip: true  # [win]
+  number: 0
 
 requirements:
   build:
+    - {{ stdlib('c') }}
     - {{ compiler('c') }}
     - {{ compiler('cxx') }}
     - python
-    - ninja
-    - patch
+    - ninja-base
     - git
-  host:
-  run:
 
 test:
   commands:
-    - test -f $PREFIX/bin/gn
+    - test -f $PREFIX/bin/gn                    # [unix]
+    - if not exist %PREFIX%\\bin\\gn.exe exit 1  # [win]
 
 about:
-  home: https://gn.googlesource.com/gn/
+  home: https://gn.googlesource.com/gn
   license: BSD-3-Clause
   license_family: BSD
   license_file: LICENSE
   summary: 'GN is a meta-build system that generates build files for Ninja.'
+  description: |
+    GN is a meta-build system that generates build files for Ninja. It is used
+    by Chromium and related projects (including PDFium) to configure native
+    builds.
+  doc_url: https://gn.googlesource.com/gn/+/main/docs/
+  dev_url: https://gn.googlesource.com/gn
 
 extra:
   recipe-maintainers:
