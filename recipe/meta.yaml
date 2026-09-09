@@ -13,9 +13,11 @@ source:
   # We have to use git as the source as the provided tarballs are not stable.
   git_url: https://gn.googlesource.com/gn
   git_rev: 3357c4f51b1a9e676378c695dd9c7e9911c35ee6  # 2026-05-26; matches pdfium chromium/7891 DEPS
+  patches:
+    - 0001-add-msvc-arm64-support.patch  # [win and arm64]
 
 build:
-  number: 0
+  number: 1
 
 requirements:
   build:
