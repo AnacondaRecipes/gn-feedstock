@@ -1,4 +1,18 @@
-﻿diff --git a/src/util/build_config.h b/src/util/build_config.h
+﻿diff --git a/build/gen.py b/build/gen.py
+index 736f6098..ca4c3a0b 100755
+--- a/build/gen.py
++++ b/build/gen.py
+@@ -614,7 +614,8 @@ def WriteGNNinja(path, platform, host, options, args_list):
+ 
+     win_manifest = os.path.relpath(
+       os.path.join(REPO_ROOT, "build/windows.manifest.xml"), options.out_path)
+-    ldflags.extend(['/DEBUG', '/MACHINE:x64', '/MANIFEST:EMBED',
++    machine_arch = os.environ.get('GN_MSVC_MACHINE', 'x64')
++    ldflags.extend(['/DEBUG', f'/MACHINE:{machine_arch}', '/MANIFEST:EMBED',
+                     f'/MANIFESTINPUT:{win_manifest}'])
+ 
+   static_libraries = {
+diff --git a/src/util/build_config.h b/src/util/build_config.h
 index 52c4f210..d6f1d788 100644
 --- a/src/util/build_config.h
 +++ b/src/util/build_config.h
